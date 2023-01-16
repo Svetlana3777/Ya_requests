@@ -1,25 +1,39 @@
-import os
-from pprint import pprint
-import requests
-import json
+Домашнее задание к лекции 8.«Работа с библиотекой requests, http-запросы»
+Задача №1
+Кто самый умный супергерой? Есть API по информации о супергероях. Нужно определить кто самый умный(intelligence) из трех супергероев- Hulk, Captain America, Thanos. Для определения id нужно использовать метод /search/name
+
+Токен, который нужно использовать для доступа к API: 2619421814940190.
+Таким образом, все адреса для доступа к API должны начинаться с https://superheroapi.com/api/2619421814940190/.
+
+-> ⚠️ Недавно сервис SuperHero API переехал на заблокированный Роскомнадзором IP-адрес, из-за чего некоторые интернет-провайдеры заблокировали к нему доступ, он может быть недоступен. В таком случае решайте это задание на REPL.it — оттуда всё должно быть доступно.
+
+Задача №2
+У Яндекс.Диска есть очень удобное и простое API. Для описания всех его методов существует Полигон. Нужно написать программу, которая принимает на вход путь до файла на компьютере и сохраняет на Яндекс.Диск с таким же именем.
+
+Все ответы приходят в формате json;
+Загрузка файла по ссылке происходит с помощью метода put и передачи туда данных;
+Токен можно получить кликнув на полигоне на кнопку "Получить OAuth-токен".
+HOST: https://cloud-api.yandex.net:443
+
+Важно: Токен публиковать в github не нужно, переменную для токена нужно оставить пустой!
+
+Шаблон для программы
 
 class YaUploader:
-    files_url = 'https://disk.yandex.ru/client/disk/files'
-    upload_link = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
-
     def __init__(self, token: str):
         self.token = token
 
-    @property
-    def headers(self): # Определяем формат заголовков запроса
-        return {
-            'Content-Type': 'application/json',
-            'Authorization': f"OAuth {token}"
-                  }
+    def upload(self, file_path: str):
+        """Метод загружает файлы по списку file_list на яндекс диск"""
+        # Тут ваша логика
+        # Функция может ничего не возвращать
 
-    def get_upload_link(self, file_path):
-        filename = file_path.split('/', )[-1]
-        params = {'path': file_path, 'overwrite': 'true'} # Определяем параметры запроса (назначаем путь загрузки, имя файла и разрешаем перезапись)
-        response = requests.get(self.upload_link, params=params, headers=self.headers) # Выполняем запрос на получение ссылки для загрузки
-        # pprint(response.json())
-        return response.json()
+
+if __name__ == '__main__':
+    # Получить путь к загружаемому файлу и токен от пользователя
+    path_to_file = ...
+    token = ...
+    uploader = YaUploader(token)
+    result = uploader.upload(path_to_file)
+*Задача №3(необязательная)
+Самый важный сайт для программистов это stackoverflow. И у него тоже есть API Нужно написать программу, которая выводит все вопросы за последние два дня и содержит тэг 'Python'. Для этого задания токен не требуется.

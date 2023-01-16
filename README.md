@@ -1,4 +1,3 @@
-# Ya_requests
 import os
 from pprint import pprint
 import requests
@@ -24,24 +23,3 @@ class YaUploader:
         response = requests.get(self.upload_link, params=params, headers=self.headers) # Выполняем запрос на получение ссылки для загрузки
         # pprint(response.json())
         return response.json()
-
-    def upload(self, file_path ):
-        href = self.get_upload_link(file_path).get('href')
-        if not href:
-            return
-
-        with open(file_path, 'rb') as file:
-            response = requests.put(href, data=file)
-            if response.status_code == 201:
-                print('File uploaded successfully')
-                return True
-            else:
-                print('File upload failed', response.status_code)
-
-if __name__ == '__main__':
-    filename = 'my_file.txt'
-    token = ''
-    uploader = YaUploader(token)
-    result = uploader.upload(filename)
-    print(result)
-

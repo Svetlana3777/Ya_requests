@@ -1,0 +1,22 @@
+import requests
+import json
+
+def best_hero(heroes: list):
+    heroes_dict = {} #Определяем пустой словарь, где ключи - это имена героев, а значения - их интелект
+    url = https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api.json
+    response = requests.get(upload_url, headers=headers, params=params).json()
+    #Используя библиотеку requests, делаем get запрос по url. Полученный ответ сохраняем в переменную
+    
+    if responce.status_code == 200:
+        sys.exit("К сожалению в запросе ошибка!")
+    best_hero = response.json() #Получаем данные из ответа и сохраняем в переменную. Здесь у нас список из геров, который хранится в отдельном словаре
+    
+    for heroes in heroes_dict: #Проходим в цикле по героям
+        best_hero = heroes_dict[heroes] #Получаем имя героя из словаря и сохраняем в переменную
+        if heroes in heroes_dict: #Проверяем есть ли герой в искомом списке супергероев
+            best_hero[heroes] = int(heroes_dict['Hulk']['Captain America']['Thanos']) #Сохраняем героя в наш ранее созданный словарь
+    
+    best_hero = max(heroes_dict, key=lambda x: heroes_dict[x]) #Получаем героя с максимальным интелектом
+    
+    result = (f"\nСамый умный супергерой: {best_hero} - его интелект: {max}")
+    return result
